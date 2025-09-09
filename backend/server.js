@@ -9,11 +9,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const PORT = 3001;
-const server = http.createServer(app);
+const PORT = process.env.PORT || 3001;const server = http.createServer(app);
 const multer = require('multer');
 const { requireAuth, requireRole } = require('./auth');
-
+require("dotenv").config();
+const db = pool;
 
 console.log(path.join(__dirname, '../frontend/public/index.html'));
 // Middleware
@@ -50,12 +50,13 @@ const upload = multer({ storage: storage });
 app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 
+// no topo do arquivo
 
 const pool = mysql.createPool({
-  host: 'ballast.proxy.rlwy.net',
-  user: 'root',
-  password: 'lStmKvcKDLaVLNHiSmXzMUMkRRAixpUt',
-  database: 'railway',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -365,7 +366,7 @@ app.post('/logout', (req, res) => {
 // WebSockets
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001", // se fores usar Live Server
+    origin: process.env.FRONTEND_URL || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }
 });
@@ -656,7 +657,7 @@ app.get('/', (req, res) => {
 
 // Iniciar servidor
 server.listen(PORT, () => {
-  console.log(`🚀 Servidor a correr em http://localhost:${PORT}`);
+  console.log(`🚀 Servidor a correr na porta ${PORT}`);
 });
 
 

@@ -1,6 +1,21 @@
 {
+  "name": "spoto",
+  "version": "1.0.0",
+  "description": "Projeto Spoto",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "pg": "^8.16.3"
-  }
+    "mysql2": "^3.6.0",
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
