@@ -51,16 +51,16 @@ app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 
 
-// Conexão MySQL usando pool (com promessas)
-const db = mysql.createPool({
-  host: 'localhost',
+const pool = mysql.createPool({
+  host: 'ballast.proxy.rlwy.net',
   user: 'root',
-  password: '',
-  database: 'spoto',
+  password: 'lStmKvcKDLaVLNHiSmXzMUMkRRAixpUt',
+  database: 'railway',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 }).promise();
+
 
 // API de spaces
 app.get('/api/spaces', async (req, res) => {
